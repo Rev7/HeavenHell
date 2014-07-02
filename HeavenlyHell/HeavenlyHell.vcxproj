@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="HHEngine.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HHEngine.cpp" />

@@ -1,8 +1,12 @@
 #include "HHEngine.h"
+#include "Tools.h"
 #include <Windows.h>
 #include <stdio.h>
 
-HHEngine* g_HHEngine = NULL;
+using namespace SDLEngine;
+using namespace Tools;
+
+HHEngine* hhEngine = NULL;
 
 int main(int argc, char* argv[])
 {
@@ -16,17 +20,25 @@ int main(int argc, char* argv[])
 	}//if
 	// ---
 	
-	g_HHEngine = new HHEngine();
+	// Instanciation HHEngine
+	hhEngine = new HHEngine();
 
-	g_HHEngine->init("Chapter 1", 100, 100, 640, 480, false);
+	// Initialisation de la fenêtre principale
+	hhEngine->init("Chapter 1", 100, 100, 640, 480, /*fullscreen=*/false);
 	
-	while(g_HHEngine->running())
+	// Boucle principale
+	while (hhEngine->isRunning())
 	{
-		g_HHEngine->handleEvents();
-		g_HHEngine->update();
-		g_HHEngine->render();
+		hhEngine->handleEvents();
+		hhEngine->update();
+		hhEngine->render();
 	}//while
 
-	g_HHEngine->clean();
+	// Libération SDL
+	hhEngine->clean();
+
+	// Libération mémoire HHEngine
+	HHTools::safeDelete(hhEngine);
+
 	return 0;
 }//main

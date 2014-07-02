@@ -2,26 +2,28 @@
 
 #include <SDL2\SDL.h>
 
-class HHEngine
+namespace SDLEngine
 {
-private:
-	bool m_bRunning;
+	class HHEngine
+	{
+	private:
+		bool running;
 
-	SDL_Window*   m_pWindow;
-	SDL_Renderer* m_pRenderer;
+		SDL_Window*   mainWindow;
+		SDL_Renderer* mainRenderer;
 
-public:
-	HHEngine(void);
-	~HHEngine(void);
+	public:
+		HHEngine(void);
+		~HHEngine(void);
 
-	bool init(const char* p_szTitle, int p_iXpos, int p_iYpos, int p_iWidth, int p_iHeight, bool p_bFullScreen);
+		bool init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen);
 
-	void render();
-	void update() {}
-	void handleEvents();
-	void clean();
+		void render();
+		void update() {}
+		void handleEvents();
+		void clean();
 
-	// Accessors
-	bool running() { return m_bRunning; }
-};
-
+		// Accesseurs
+		bool isRunning() { return running; }
+	};
+}

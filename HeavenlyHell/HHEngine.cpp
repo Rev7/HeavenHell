@@ -1,110 +1,121 @@
 #include "HHEngine.h"
 #include <iostream>
+#include "Tools.h"
 
-//---------------------------------------------------------------------------
+using namespace Tools;
 
-HHEngine::HHEngine(void)
+namespace SDLEngine
 {
-}//HHEngine
-
-HHEngine::~HHEngine(void)
-{
-}//~HHEngine
-
-//---------------------------------------------------------------------------
-
-bool HHEngine::init(const char* p_szTitle, int p_iXpos, int p_iYpos, int p_iWidth, int p_iHeight, bool p_bFullScreen)
-{
-	// Initialisation SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+	//---------------------------------------------------------------------------
+	HHEngine::HHEngine(void):
+		running(false),
+		mainWindow(NULL),
+		mainRenderer(NULL)
 	{
-		std::cout << "SDL init success\n";
+	}//HHEngine
+	//---------------------------------------------------------------------------
 
-		int l_iFlags = 0;
-		if (p_bFullScreen)
+	HHEngine::~HHEngine(void)
+	{
+	}//~HHEngine
+	//---------------------------------------------------------------------------
+
+	bool HHEngine::init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen)
+	{
+		// Initialisation SDL
+		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
-			l_iFlags = SDL_WINDOW_FULLSCREEN;
-		}//if
+			std::cout << "SDL init success\n";
 
-		// Initialisation de la fenêtre
-		m_pWindow = SDL_CreateWindow(p_szTitle, p_iXpos, p_iYpos, p_iWidth, p_iHeight, l_iFlags);
-		if (m_pWindow != 0) 
-		{
-			// Fenêtre initialisée
-			std::cout << "window creation success\n";
-
-			// Initialisation du rendu
-			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-			if (m_pRenderer != 0) 
+			int flags = 0;
+			if (fullScreen)
 			{
-				// Rendu initialisé
-				std::cout << "renderer creation success\n";
-
-				SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+				flags = SDL_WINDOW_FULLSCREEN;
 			}//if
+
+			// Initialisation de la fenêtre
+			mainWindow = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
+			if (mainWindow != 0)
+			{
+				// Fenêtre initialisée
+				std::cout << "window creation success\n";
+
+				// Initialisation du rendu
+				mainRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
+				if (mainRenderer != 0)
+				{
+					// Rendu initialisé
+					std::cout << "renderer creation success\n";
+					
+					SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, 0);
+				}//if
+				else
+				{
+					// Echec d'initialisation du rendu
+					std::cout << "### renderer init fail\n";
+					HHTools::logSDLError(std::cout, "SDL_CreateRenderer");
+					return false;	// !!! !!! !!!
+				}//else
+			}
 			else
 			{
-				// Echec d'initialisation du rendu
-				std::cout << "### renderer init fail\n";
+				// Echec d'initialisation de la fenêtre
+				std::cout << "### window init fail\n";
+				HHTools::logSDLError(std::cout, "SDL_CreateWindow");
 				return false;	// !!! !!! !!!
 			}//else
-		}
+		}//if
 		else
 		{
-			// Echec d'initialisation de la fenêtre
-			std::cout << "### window init fail\n";
+			// Echec d'initialisation SDL
+			std::cout << "### SDL init fail\n";
+			HHTools::logSDLError(std::cout, "SDL_Init");
 			return false;	// !!! !!! !!!
 		}//else
-	}//if
-	else
+
+		// Tout est initialisé correctement, démarrage de la boucle principale
+		std::cout << "init success\n";
+		running = true;
+
+		return true;
+
+	}//init
+	//--------------------------------------------------------------------------
+
+	void HHEngine::render()
 	{
-		// Echec d'initialisation SDL
-		std::cout << "### SDL init fail\n";
-		return false;	// !!! !!! !!!
-	}//else
+		// Nettoyage du rendu
+		SDL_RenderClear(mainRenderer);
 
-	// Tout est initialisé correctement, démarrage de la boucle principale
-	std::cout << "init success\n";
-	m_bRunning = true;
+		// Nouveau rendu
+		SDL_RenderPresent(mainRenderer);
+	}//render
+	//-------------------------------------------------------------------------
 
-	return true;
-	
-}//init
-//--------------------------------------------------------------------------
-
-void HHEngine::render()
-{
-	// Nettoyage du rendu
-	SDL_RenderClear(m_pRenderer);
-
-	// Nouveau rendu
-	SDL_RenderPresent(m_pRenderer);
-}//render
-//-------------------------------------------------------------------------
-
-void HHEngine::handleEvents()
-{
-	SDL_Event event;
-	if(SDL_PollEvent(&event))
+	void HHEngine::handleEvents()
 	{
-		switch (event.type)
+		SDL_Event event;
+		if (SDL_PollEvent(&event))
 		{
+			switch (event.type)
+			{
 			case SDL_QUIT:
-				m_bRunning = false;
+				running = false;
 				break;
 
 			default:
 				break;
-		}//Switch
-	}//if
-}//handleEvents
-//-----------------------------------------------------------------------
+			}//switch
+		}//if
+	}//handleEvents
+	//-----------------------------------------------------------------------
 
-void HHEngine::clean()
-{
-	std::cout << "cleaning game\n";
+	void HHEngine::clean()
+	{
+		std::cout << "cleaning game\n";
 
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
-}//clean
+		SDL_DestroyWindow(mainWindow);
+		SDL_DestroyRenderer(mainRenderer);
+		SDL_Quit();
+	}//clean
+}
