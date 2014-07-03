@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SDL2\SDL.h>
+#include "Tools.h"
 
-namespace SDLEngine
+namespace sdlEngine
 {
 	class HHEngine
 	{

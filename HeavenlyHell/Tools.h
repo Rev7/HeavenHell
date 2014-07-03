@@ -1,18 +1,19 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include "SDL2\SDL.h"
 
-namespace Tools
+namespace tools
 {
-	class HHTools
+	class Tools
 	{
 	public:
 
 		// Logger d'erreur SDL
 		static void logSDLError(std::ostream &os, const std::string &msg)
 		{
-			os << "### ERROR " << msg.c_str() << ": " << SDL_GetError() << std::endl;
+			os << "### ERROR " << msg << ": " << SDL_GetError() << std::endl;
 		}//logSDLError
 
 		// Libération mémoire

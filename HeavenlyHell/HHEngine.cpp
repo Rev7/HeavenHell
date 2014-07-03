@@ -1,10 +1,8 @@
 #include "HHEngine.h"
-#include <iostream>
-#include "Tools.h"
 
-using namespace Tools;
+using namespace tools;
 
-namespace SDLEngine
+namespace sdlEngine
 {
 	//---------------------------------------------------------------------------
 	HHEngine::HHEngine(void):
@@ -35,14 +33,14 @@ namespace SDLEngine
 
 			// Initialisation de la fenêtre
 			mainWindow = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-			if (mainWindow != 0)
+			if (mainWindow != NULL)
 			{
 				// Fenêtre initialisée
 				std::cout << "window creation success\n";
 
 				// Initialisation du rendu
 				mainRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
-				if (mainRenderer != 0)
+				if (mainRenderer != NULL)
 				{
 					// Rendu initialisé
 					std::cout << "renderer creation success\n";
@@ -53,7 +51,7 @@ namespace SDLEngine
 				{
 					// Echec d'initialisation du rendu
 					std::cout << "### renderer init fail\n";
-					HHTools::logSDLError(std::cout, "SDL_CreateRenderer");
+					Tools::logSDLError(std::cout, "SDL_CreateRenderer");
 					return false;	// !!! !!! !!!
 				}//else
 			}
@@ -61,7 +59,7 @@ namespace SDLEngine
 			{
 				// Echec d'initialisation de la fenêtre
 				std::cout << "### window init fail\n";
-				HHTools::logSDLError(std::cout, "SDL_CreateWindow");
+				Tools::logSDLError(std::cout, "SDL_CreateWindow");
 				return false;	// !!! !!! !!!
 			}//else
 		}//if
@@ -69,7 +67,7 @@ namespace SDLEngine
 		{
 			// Echec d'initialisation SDL
 			std::cout << "### SDL init fail\n";
-			HHTools::logSDLError(std::cout, "SDL_Init");
+			Tools::logSDLError(std::cout, "SDL_Init");
 			return false;	// !!! !!! !!!
 		}//else
 
