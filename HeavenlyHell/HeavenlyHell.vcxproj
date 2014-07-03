@@ -74,13 +74,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="HHEngine.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="HHEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
