@@ -1,10 +1,8 @@
 #include "HHEngine.h"
-#include "Tools.h"
 #include <Windows.h>
-#include <stdio.h>
 
-using namespace SDLEngine;
-using namespace Tools;
+using namespace sdlEngine;
+using namespace tools;
 
 HHEngine* hhEngine = NULL;
 
@@ -38,7 +36,7 @@ int main(int argc, char* argv[])
 	hhEngine->clean();
 
 	// Libération mémoire HHEngine
-	HHTools::safeDelete(hhEngine);
+	Tools::safeDelete(hhEngine);
 
 	return 0;
 }//main
