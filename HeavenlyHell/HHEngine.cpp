@@ -36,21 +36,21 @@ namespace sdlEngine
 			if (mainWindow != NULL)
 			{
 				// Fenêtre initialisée
-				std::cout << "window creation success\n";
+				std::cout << "Window creation success\n";
 
 				// Initialisation du rendu
 				mainRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
 				if (mainRenderer != NULL)
 				{
 					// Rendu initialisé
-					std::cout << "renderer creation success\n";
+					std::cout << "Renderer creation success\n";
 					
 					SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, 0);
 				}//if
 				else
 				{
 					// Echec d'initialisation du rendu
-					std::cout << "### renderer init fail\n";
+					std::cout << "### Renderer init fail\n";
 					Tools::logSDLError(std::cout, "SDL_CreateRenderer");
 					return false;	// !!! !!! !!!
 				}//else
@@ -58,7 +58,7 @@ namespace sdlEngine
 			else
 			{
 				// Echec d'initialisation de la fenêtre
-				std::cout << "### window init fail\n";
+				std::cout << "### Window init fail\n";
 				Tools::logSDLError(std::cout, "SDL_CreateWindow");
 				return false;	// !!! !!! !!!
 			}//else
