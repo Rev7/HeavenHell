@@ -17,7 +17,7 @@ namespace textureManager
 	bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* renderer)
 	{
 		/// \todo AJouter plugin SDL_Image
-		SDL_Surface* tempSurface = NULL;//IMG_Load(fileName.c_str());
+		SDL_Surface* tempSurface = IMG_Load(fileName.c_str());
 		if (NULL == tempSurface) 
 		{
 			std::cout << "### image load fail\n";
@@ -43,7 +43,7 @@ namespace textureManager
 	}//load
 	//------------------------------------------------------------------------
 	
-	void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE)
+	void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* renderer, SDL_RendererFlip flip)
 	{
 		SDL_Rect srcRect;
 		SDL_Rect destRect;
@@ -62,7 +62,7 @@ namespace textureManager
 	}//draw
 	//-----------------------------------------------------------------------
 	
-	void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE)
+	void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip)
 	{
 		SDL_Rect srcRect;
 		SDL_Rect destRect;
