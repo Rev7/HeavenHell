@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 #include "SDL2\SDL.h"
 #include "SDL2\SDL_image.h"
 
@@ -16,6 +17,7 @@ namespace tools
 		{
 			os << "### ERROR " << msg << ": " << SDL_GetError() << std::endl;
 		}//logSDLError
+		//--------------------------------------------------------------------------
 
 		// Libération mémoire
 		static void safeDelete(void* object)
@@ -28,6 +30,3 @@ namespace tools
 		}//safeDelete
 	};
 }
-
-
-

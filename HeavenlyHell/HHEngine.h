@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Tools.h"
+#include "TextureManager.h"
+
+using namespace textureManager;
 
 namespace sdlEngine
 {
