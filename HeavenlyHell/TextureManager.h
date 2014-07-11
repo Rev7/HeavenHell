@@ -2,12 +2,11 @@
 
 #include "Tools.h"
 
-namespace textureManager
+namespace sdlEngine
 {
 	class TextureManager
 	{
 	private:
-
 		std::map<std::string, SDL_Texture*> textureMap;
 		static TextureManager* instance;
 
@@ -15,7 +14,6 @@ namespace textureManager
 		~TextureManager(void) {}
 
 	public:
-
 		static TextureManager* Instance()
 		{
 			if (NULL == instance)

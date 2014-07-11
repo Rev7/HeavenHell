@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	hhEngine = new HHEngine();
 
 	// Initialisation de la fenêtre principale
-	hhEngine->init("Chapter 1", 100, 100, 640, 480, /*fullscreen=*/false);
+	hhEngine->init("Heavenly Hell", 100, 100, 640, 480, /*fullscreen=*/false);
 	
 	// Boucle principale
 	while (hhEngine->isRunning())
@@ -30,13 +30,16 @@ int main(int argc, char* argv[])
 		hhEngine->handleEvents();
 		hhEngine->update();
 		hhEngine->render();
+
+		SDL_Delay(10);
 	}//while
 
 	// Libération SDL
 	hhEngine->clean();
 
 	// Libération mémoire HHEngine
-	Tools::safeDelete(hhEngine);
+	//Tools::safeDelete(hhEngine);
+	SAFE_DELETE(hhEngine);
 
 	return 0;
 }//main

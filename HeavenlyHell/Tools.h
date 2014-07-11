@@ -6,6 +6,9 @@
 #include "SDL2\SDL.h"
 #include "SDL2\SDL_image.h"
 
+#define SAFE_DELETE(x)			{ if (x != NULL) { delete x; x = NULL; } }
+#define SAFE_DELETE_ARRAY(x)	{ if (x != NULL) { delete[] x; x = NULL; } }
+
 namespace tools
 {
 	class Tools

@@ -2,7 +2,7 @@
 
 using namespace tools;
 
-namespace textureManager
+namespace sdlEngine
 {
 	TextureManager* TextureManager::instance = NULL;
 
@@ -10,7 +10,6 @@ namespace textureManager
 
 	bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* renderer)
 	{
-		/// \todo AJouter plugin SDL_Image
 		SDL_Surface* tempSurface = IMG_Load(fileName.c_str());
 		if (NULL == tempSurface) 
 		{
