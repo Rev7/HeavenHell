@@ -1,10 +1,11 @@
 #include "TextureManager.h"
+#include "SDL2\SDL_image.h"
 
 using namespace tools;
 
 namespace sdlEngine
 {
-	TextureManager* TextureManager::instance = NULL;
+	TextureManager* TextureManager::_instance = NULL;
 
 	//---------------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ namespace sdlEngine
 		SDL_FreeSurface(tempSurface);
 
 		// Ajout de la texture à la map 
-		textureMap[id] = texture;
+		_textureMap[id] = texture;
 
 		return true;
 
@@ -48,7 +49,7 @@ namespace sdlEngine
 		destRect.x = x;
 		destRect.y = y;
 
-		if (SDL_RenderCopyEx(renderer, textureMap[id], &srcRect, &destRect, 0, 0, flip) != 0)
+		if (SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, 0, 0, flip) != 0)
 		{
 			Tools::logSDLError(std::cout, "SDL_RenderCopyEx");
 		}//if
@@ -67,7 +68,7 @@ namespace sdlEngine
 		destRect.x = x;
 		destRect.y = y;
 
-		if (SDL_RenderCopyEx(renderer, textureMap[id], &srcRect, &destRect, 0, 0, flip) != 0)
+		if (SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, 0, 0, flip) != 0)
 		{
 			Tools::logSDLError(std::cout, "SDL_RenderCopyEx");
 		}//if

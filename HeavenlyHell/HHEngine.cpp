@@ -1,21 +1,15 @@
 #include "HHEngine.h"
+#include "TextureManager.h"
+#include "InputHandler.h"
+#include "Player.h"
+#include "LoaderParams.h"
 
 using namespace tools;
 
 namespace sdlEngine
 {
-	//---------------------------------------------------------------------------
-	HHEngine::HHEngine(void):
-		running(false),
-		mainWindow(NULL),
-		mainRenderer(NULL)
-	{
-	}//HHEngine
-	//---------------------------------------------------------------------------
+	HHEngine* HHEngine::_instance = NULL;
 
-	HHEngine::~HHEngine(void)
-	{
-	}//~HHEngine
 	//---------------------------------------------------------------------------
 
 	bool HHEngine::init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen)
@@ -32,20 +26,33 @@ namespace sdlEngine
 			}//if
 
 			// Initialisation de la fenêtre
-			mainWindow = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-			if (mainWindow != NULL)
+			_mainWindow = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
+			if (_mainWindow != NULL)
 			{
 				// Fenêtre initialisée
 				std::cout << "Window creation success\n";
 
 				// Initialisation du rendu
-				mainRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
-				if (mainRenderer != NULL)
+				_mainRenderer = SDL_CreateRenderer(_mainWindow, -1, 0);
+				if (_mainRenderer != NULL)
 				{
 					// Rendu initialisé
 					std::cout << "Renderer creation success\n";
 					
-					SDL_SetRenderDrawColor(mainRenderer, 0, 0, 0, 0);
+					SDL_SetRenderDrawColor(_mainRenderer, 0, 0, 0, 0);
+
+					// Chargement des textures
+					if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", _mainRenderer))
+					{
+						std::cout << "### Texture load fail\n";
+						return false;	// !!! !!! !!!
+					}//if
+
+					// Initialisation des Joysticks
+					TheInputHandler::Instance()->initialiseJoysticks();
+
+					// TEST : chargement d'un gameObject
+					_player = new Player(new LoaderParams(100, 100, 128, 82, "animate"));
 				}//if
 				else
 				{
@@ -72,49 +79,52 @@ namespace sdlEngine
 		}//else
 
 		// Tout est initialisé correctement, démarrage de la boucle principale
-		std::cout << "init success\n";
-		running = true;
+		std::cout << "Init success\n";
+		_running = true;
 
 		return true;
-
 	}//init
 	//---------------------------------------------------------------------------
 
 	void HHEngine::render()
 	{
 		// Nettoyage du rendu
-		SDL_RenderClear(mainRenderer);
+		SDL_RenderClear(_mainRenderer);
 
 		// ...
+		_player->draw();
+
 		// Nouveau rendu
-		SDL_RenderPresent(mainRenderer);
+		SDL_RenderPresent(_mainRenderer);
 	}//render
+	//---------------------------------------------------------------------------
+
+	void HHEngine::update()
+	{
+		_player->update();
+	}//update
 	//---------------------------------------------------------------------------
 
 	void HHEngine::handleEvents()
 	{
-		SDL_Event event;
-		if (SDL_PollEvent(&event))
-		{
-			switch (event.type)
-			{
-			case SDL_QUIT:
-				running = false;
-				break;
-
-			default:
-				break;
-			}//switch
-		}//if
+		TheInputHandler::Instance()->update();
 	}//handleEvents
 	//---------------------------------------------------------------------------
 
 	void HHEngine::clean()
 	{
-		std::cout << "cleaning game\n";
+		std::cout << "Cleaning game\n";
 
-		SDL_DestroyWindow(mainWindow);
-		SDL_DestroyRenderer(mainRenderer);
+		TheInputHandler::Instance()->clean();
+
+		SDL_DestroyWindow(_mainWindow);
+		SDL_DestroyRenderer(_mainRenderer);
 		SDL_Quit();
 	}//clean
+	//---------------------------------------------------------------------------
+
+	void HHEngine::quit()
+	{
+		_running = false;
+	}//quit
 }

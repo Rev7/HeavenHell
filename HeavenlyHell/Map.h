@@ -2,7 +2,6 @@
 
 namespace Model
 {
-
 	class Cell
 	{
 	public:
@@ -16,6 +15,4 @@ namespace Model
 		Map(void);
 		~Map(void);
 	};
-
 }
-

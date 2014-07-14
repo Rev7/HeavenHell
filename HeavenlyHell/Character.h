@@ -2,22 +2,20 @@
 
 namespace Model
 {
+	class Character
+	{
+	public:
+		Character(void);
+		~Character(void);
 
-class Character
-{
-private:
-	unsigned int _x;
-	unsigned int _y;
+		unsigned int getX();
+		unsigned int getY();
 
-public:
-	Character(void);
-	~Character(void);
+		void setX(unsigned int x);
+		void setY(unsigned int y);
 
-	unsigned int getX();
-	unsigned int getY();
-
-	void setX(unsigned int x);
-	void setY(unsigned int y);
-};
-
+	private:
+		unsigned int _x;
+		unsigned int _y;
+	};
 }

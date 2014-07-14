@@ -2,12 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include <map>
 #include "SDL2\SDL.h"
-#include "SDL2\SDL_image.h"
-
-#define SAFE_DELETE(x)			{ if (x != NULL) { delete x; x = NULL; } }
-#define SAFE_DELETE_ARRAY(x)	{ if (x != NULL) { delete[] x; x = NULL; } }
 
 namespace tools
 {
@@ -15,21 +10,46 @@ namespace tools
 	{
 	public:
 
-		// Logger d'erreur SDL
+		/// <summary>
+		/// Logger d'erreur SDL
+		/// </summary>
+		/// <param name="os">Sortie standard</param>
+		/// <param name="msg">Message</param>
 		static void logSDLError(std::ostream &os, const std::string &msg)
 		{
 			os << "### ERROR " << msg << ": " << SDL_GetError() << std::endl;
 		}//logSDLError
+
 		//--------------------------------------------------------------------------
 
-		// Libération mémoire
-		static void safeDelete(void* object)
+		/// <summary>
+		/// Libération mémoire
+		/// </summary>
+		/// <param name="ptr">L'objet à libérer</param>
+		template<typename T>
+		static void safeDelete(T*& ptr)
 		{
-			if (NULL == object)
+			if (ptr != NULL)
 			{
-				delete object;
-				object = NULL;
-			}//if
+				delete ptr;
+				ptr = NULL;
+			}//if			
 		}//safeDelete
+
+		//--------------------------------------------------------------------------
+
+		/// <summary>
+		/// Libération mémoire tableau
+		/// </summary>
+		/// <param name="ptr">L'objet tableau à libérer</param>
+		template <typename T>
+		static void safeDeleteArray(T*& ptr)
+		{
+			if (ptr != NULL)
+			{
+				delete[] ptr;
+				ptr = NULL;
+			}//if
+		}//safeDeleteArray
 	};
 }

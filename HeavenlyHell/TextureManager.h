@@ -1,32 +1,33 @@
 #pragma once
 
 #include "Tools.h"
+#include <map>
 
 namespace sdlEngine
 {
 	class TextureManager
 	{
-	private:
-		std::map<std::string, SDL_Texture*> textureMap;
-		static TextureManager* instance;
-
-		TextureManager(void) {}
-		~TextureManager(void) {}
-
 	public:
 		static TextureManager* Instance()
 		{
-			if (NULL == instance)
+			if (NULL == _instance)
 			{
-				instance = new TextureManager();
+				_instance = new TextureManager();
 			}//if
 
-			return instance;
+			return _instance;
 		}//Instance
 
 		bool load(std::string fileName, std::string id, SDL_Renderer* renderer); 
 		void draw(std::string id, int x, int y, int width, int height, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 		void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+	private:
+		TextureManager(void) {}
+		~TextureManager(void) {}
+
+		std::map<std::string, SDL_Texture*> _textureMap;
+		static TextureManager* _instance;
 	};
 
 	typedef TextureManager TheTextureManager;
