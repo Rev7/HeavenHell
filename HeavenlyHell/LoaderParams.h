@@ -7,12 +7,13 @@ namespace sdlEngine
 	class LoaderParams
 	{
 	public:
-		LoaderParams(int x, int y, int width, int height, std::string textureID):
+		LoaderParams(int x, int y, int width, int height, std::string textureID, int numFrames):
 			_x(x), 
 			_y(y),
 			_width(width),
 			_height(height),
-			_textureID(textureID)
+			_textureID(textureID),
+			_numFrames(numFrames)
 		{}//LoaderParams
 
 		// Accesseurs
@@ -21,6 +22,7 @@ namespace sdlEngine
 		int getWidth() const { return _width; }
 		int getHeight() const { return _height; }
 		std::string getTextureID() const { return _textureID; }
+		int getNumFrames() const { return _numFrames; }
 
 	private:
 		int _x;
@@ -30,5 +32,7 @@ namespace sdlEngine
 		int _height;
 
 		std::string _textureID;
+
+		int _numFrames;
 	};
 }

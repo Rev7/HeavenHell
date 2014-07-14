@@ -1,8 +1,10 @@
 #include "HHEngine.h"
 #include "TextureManager.h"
 #include "InputHandler.h"
-#include "Player.h"
 #include "LoaderParams.h"
+#include "GameStateMachine.h"
+#include "MenuState.h"
+#include "PlayState.h"
 
 using namespace tools;
 
@@ -51,8 +53,9 @@ namespace sdlEngine
 					// Initialisation des Joysticks
 					TheInputHandler::Instance()->initialiseJoysticks();
 
-					// TEST : chargement d'un gameObject
-					_player = new Player(new LoaderParams(100, 100, 128, 82, "animate"));
+					// FSM : Final state machines
+					_gameStateMachine = new GameStateMachine();
+					_gameStateMachine->pushState(new MenuState());
 				}//if
 				else
 				{
@@ -91,8 +94,7 @@ namespace sdlEngine
 		// Nettoyage du rendu
 		SDL_RenderClear(_mainRenderer);
 
-		// ...
-		_player->draw();
+		_gameStateMachine->render();
 
 		// Nouveau rendu
 		SDL_RenderPresent(_mainRenderer);
@@ -101,13 +103,18 @@ namespace sdlEngine
 
 	void HHEngine::update()
 	{
-		_player->update();
+		_gameStateMachine->update();
 	}//update
 	//---------------------------------------------------------------------------
 
 	void HHEngine::handleEvents()
 	{
 		TheInputHandler::Instance()->update();
+
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+		{
+			_gameStateMachine->changeState(new PlayState());
+		}//if
 	}//handleEvents
 	//---------------------------------------------------------------------------
 
@@ -115,6 +122,7 @@ namespace sdlEngine
 	{
 		std::cout << "Cleaning game\n";
 
+		_gameStateMachine->clean();
 		TheInputHandler::Instance()->clean();
 
 		SDL_DestroyWindow(_mainWindow);

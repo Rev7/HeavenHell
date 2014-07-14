@@ -4,7 +4,7 @@
 
 namespace sdlEngine
 {
-	class Player;
+	class GameStateMachine;
 	
 	class HHEngine
 	{
@@ -30,6 +30,7 @@ namespace sdlEngine
 		// Accesseurs
 		bool running() const { return _running; }
 		SDL_Renderer* getRenderer() const { return _mainRenderer; }
+		GameStateMachine* getStateMachine() { return _gameStateMachine; }
 	
 	private:
 		HHEngine(void) {}
@@ -42,7 +43,7 @@ namespace sdlEngine
 
 		bool _running;
 
-		Player* _player;
+		GameStateMachine* _gameStateMachine;
 	};
 
 	typedef HHEngine TheHHEngine;

@@ -5,8 +5,8 @@
 using namespace sdlEngine;
 using namespace tools;
 
-const int FPS = 60;                     //!< fps cible
-const int DELAY_TIME = 1000.0f / FPS;   //!< Intervalle en ms pour obtenir le fps cible
+const int FPS = 60;                            //!< fps cible
+const int DELAY_TIME = (int)(1000.0f / FPS);   //!< Intervalle en ms pour obtenir le fps cible
 
 int main(int argc, char* argv[])
 {

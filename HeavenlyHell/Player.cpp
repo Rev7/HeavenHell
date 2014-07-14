@@ -22,7 +22,7 @@ namespace sdlEngine
 
 		handleInput();
 
-		_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+		_currentFrame = int(((SDL_GetTicks() / 100) % _numFrames));
 
 		SDLGameObject::update();
 	}//update
@@ -36,65 +36,9 @@ namespace sdlEngine
 
 	void Player::handleInput()
 	{
-		if (TheInputHandler::Instance()->joysticksInitialised())
-		{
-			if (TheInputHandler::Instance()->getAxisX(0, 1) > 0 ||
-				TheInputHandler::Instance()->getAxisX(0, 1) < 0)
-			{
-				_velocity.setX(2.0f * TheInputHandler::Instance()->getAxisX(0, 1));
-			}//if
+		Vector2D* target = TheInputHandler::Instance()->getMousePosition();
 
-			if (TheInputHandler::Instance()->getAxisY(0, 1) > 0 ||
-				TheInputHandler::Instance()->getAxisY(0, 1) < 0)
-			{
-				_velocity.setY(2.0f * TheInputHandler::Instance()->getAxisY(0, 1));
-			}//if
-
-			if (TheInputHandler::Instance()->getAxisX(0, 2) > 0 ||
-				TheInputHandler::Instance()->getAxisX(0, 2) < 0)
-			{
-				_velocity.setX(2.0f * TheInputHandler::Instance()->getAxisX(0, 2));
-			}//if
-
-			if (TheInputHandler::Instance()->getAxisY(0, 2) > 0 ||
-				TheInputHandler::Instance()->getAxisY(0, 2) < 0)
-			{
-				_velocity.setY(2.0f * TheInputHandler::Instance()->getAxisY(0, 2));
-			}//if
-
-			if (TheInputHandler::Instance()->getButtonState(0, 3))
-			{
-				_velocity.setX(2.0f);
-			}//if
-		}//if
-
-		if (TheInputHandler::Instance()->getMouseButtonState(LEFT))
-		{
-			_velocity.setX(2.0f);
-		}//if
-
-		// Le gameObject suit la souris
-		/*Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
-		_velocity = (*vec - _position) / 100;*/
-
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
-		{
-			_velocity.setX(2.0f);
-		}//if
-
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
-		{
-			_velocity.setX(-2.0f);
-		}//if
-
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
-		{
-			_velocity.setY(-2.0f);
-		}//if
-
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
-		{
-			_velocity.setY(2.0f);
-		}//if
+		_velocity = *target - _position;
+		_velocity /= 50;
 	}//handleInput
 }

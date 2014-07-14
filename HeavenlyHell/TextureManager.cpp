@@ -73,4 +73,10 @@ namespace sdlEngine
 			Tools::logSDLError(std::cout, "SDL_RenderCopyEx");
 		}//if
 	}//drawFrame
+	//---------------------------------------------------------------------------
+
+	void TextureManager::clearFromTextureMap(std::string id)
+	{
+		_textureMap.erase(id);
+	}//clearFromTextureMap
 }

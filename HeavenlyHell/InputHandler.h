@@ -29,6 +29,7 @@ namespace sdlEngine
 
 		void update();
 		void clean();
+		void reset();
 
 		// Clavier
 		bool isKeyDown(SDL_Scancode key) const;

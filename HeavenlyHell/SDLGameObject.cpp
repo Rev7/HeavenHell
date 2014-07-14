@@ -7,8 +7,8 @@ namespace sdlEngine
 {
 	SDLGameObject::SDLGameObject(const LoaderParams* params) :
 		GameObject(params),
-		_position(params->getX(), params->getY()),
-		_velocity(0, 0)
+		_position((float)params->getX(), (float)params->getY()),
+		_velocity(0.0f, 0.0f)
 	{
 		_width = params->getWidth();
 		_height = params->getHeight();
@@ -16,12 +16,21 @@ namespace sdlEngine
 
 		_currentRow = 1;
 		_currentFrame = 1;
+
+		_numFrames = params->getNumFrames();
 	}//SDLGameObject
 	//--------------------------------------------------------------------------
 
 	void SDLGameObject::draw()
 	{
-		TheTextureManager::Instance()->drawFrame(_textureID, (int)_position.getX(), (int)_position.getY(), _width, _height, _currentRow, _currentFrame, TheHHEngine::Instance()->getRenderer());
+		if (_velocity.getX() > 0)
+		{
+			TheTextureManager::Instance()->drawFrame(_textureID, (int)_position.getX(), (int)_position.getY(), _width, _height, _currentRow, _currentFrame, TheHHEngine::Instance()->getRenderer(), SDL_FLIP_HORIZONTAL);
+		}//if
+		else
+		{
+			TheTextureManager::Instance()->drawFrame(_textureID, (int)_position.getX(), (int)_position.getY(), _width, _height, _currentRow, _currentFrame, TheHHEngine::Instance()->getRenderer());
+		}//else
 	}//draw
 	//--------------------------------------------------------------------------
 
@@ -31,7 +40,7 @@ namespace sdlEngine
 		_position += _velocity;
 	}//update
 	//--------------------------------------------------------------------------
-
+	
 	void SDLGameObject::clean()
 	{
 

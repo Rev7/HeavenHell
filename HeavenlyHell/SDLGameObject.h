@@ -15,6 +15,11 @@ namespace sdlEngine
 		virtual void update();
 		virtual void clean();
 
+		// Accesseurs
+		Vector2D& getPosition() { return _position; }
+		int getWidth() const { return _width; }
+		int getHeight() const { return _height; }
+
 	protected:
 		Vector2D _position;
 		Vector2D _velocity;
@@ -27,5 +32,7 @@ namespace sdlEngine
 		int _currentFrame;
 
 		std::string _textureID;
+
+		int _numFrames;
 	};
 }

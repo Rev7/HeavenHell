@@ -95,6 +95,14 @@ namespace sdlEngine
 	}//clean
 	//--------------------------------------------------------------------------
 
+	void InputHandler::reset()
+	{
+		_mouseButtonStates[LEFT] = false;
+		_mouseButtonStates[MIDDLE] = false;
+		_mouseButtonStates[RIGHT] = false;
+	}//reset
+	//--------------------------------------------------------------------------
+
 	void InputHandler::initialiseJoysticks()
 	{
 		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
@@ -147,11 +155,11 @@ namespace sdlEngine
 		{
 			if (stick == 1)
 			{
-				return _joystickValues[joy].first->getX();
+				return (int)_joystickValues[joy].first->getX();
 			}
 			else if (stick == 2)
 			{
-				return _joystickValues[joy].second->getX();
+				return (int)_joystickValues[joy].second->getX();
 			}//else if
 		}//if
 
@@ -165,11 +173,11 @@ namespace sdlEngine
 		{
 			if (stick == 1)
 			{
-				return _joystickValues[joy].first->getY();
+				return (int)_joystickValues[joy].first->getY();
 			}
 			else if (stick == 2)
 			{
-				return _joystickValues[joy].second->getY();
+				return (int)_joystickValues[joy].second->getY();
 			}//else if
 		}//if
 
@@ -205,8 +213,8 @@ namespace sdlEngine
 	
 	void InputHandler::onMouseMove(SDL_Event& event)
 	{
-		_mousePosition->setX(event.motion.x);
-		_mousePosition->setY(event.motion.y);
+		_mousePosition->setX((float)event.motion.x);
+		_mousePosition->setY((float)event.motion.y);
 	}//onMouseMove
 	//--------------------------------------------------------------------------
 
