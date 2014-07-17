@@ -1,20 +1,31 @@
 #include "Map.h"
+#include "Tile.h"
 
-namespace Model
-{
-	Cell::Cell(void)
-	{
-	}
+namespace Model{
 
-	Cell::~Cell(void)
-	{
-	}
+	Map::Map(unsigned int rows, unsigned int cols)
+	{			
+		unsigned int row_count = (rows < MAX_ROWS) ? rows : MAX_ROWS;
+		unsigned int col_count = (cols < MAX_COLS) ? cols : MAX_COLS;
 
-	Map::Map(void)
-	{
-	}
+		// Construction de la Map
+		for (unsigned int i = 0; i < row_count; ++i)
+		{
+			std::vector<Tile> current_row = std::vector<Tile>();
 
-	Map::~Map(void)
-	{
+			for (unsigned int j = 0; j < col_count; ++j) 
+			{
+				Tile cell = Tile();
+				current_row.push_back(cell);
+			}
+
+			_tiles.push_back(current_row);
+
+		}
 	}
+	//--------------------------------------------------------------------------
+
+	Map::~Map(void) {}
+	//--------------------------------------------------------------------------
+
 }
