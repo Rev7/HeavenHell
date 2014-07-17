@@ -16,3 +16,9 @@ namespace Model
 	//--------------------------------------------------------------------------
 
 }
+
+/* TODO:
+ - Implémenter le déplacement d'un perso
+ - Modifier l'identification d'une case (x&y --> n)
+ - Algorithme de plus court chemin
+*/
