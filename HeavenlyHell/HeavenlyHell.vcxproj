@@ -79,6 +79,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
@@ -93,6 +94,8 @@
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="tinyXML\tinystr.h" />
+    <ClInclude Include="tinyXML\tinyxml.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
@@ -114,6 +117,10 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SDLGameObject.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="tinyXML\tinystr.cpp" />
+    <ClCompile Include="tinyXML\tinyxml.cpp" />
+    <ClCompile Include="tinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="tinyXML\tinyxmlparser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
