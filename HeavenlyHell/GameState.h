@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace sdlEngine
 {
@@ -14,5 +15,8 @@ namespace sdlEngine
 		virtual bool onExit() = 0;
 
 		virtual std::string getStateID() const = 0;
+
+	protected:
+		std::vector<std::string> _textureIDList;
 	};
 }

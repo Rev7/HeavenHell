@@ -1,13 +1,13 @@
 #pragma once
 
-#include "GameState.h"
+#include "MenuState.h"
 #include <vector>
 
 namespace sdlEngine
 {
 	class GameObject;
 	
-	class PauseState : public GameState
+	class PauseState : public MenuState
 	{
 	public:
 		virtual void update();
@@ -19,6 +19,8 @@ namespace sdlEngine
 		virtual std::string getStateID() const { return _PauseID; }
 
 	private:
+		virtual void setCallbacks(const std::vector<Callback>& callbacks);
+
 		static const std::string _PauseID;
 
 		std::vector<GameObject*> _gameObjects;

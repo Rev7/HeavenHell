@@ -5,11 +5,18 @@
 
 namespace sdlEngine
 {
-	SDLGameObject::SDLGameObject(const LoaderParams* params) :
-		GameObject(params),
-		_position((float)params->getX(), (float)params->getY()),
-		_velocity(0.0f, 0.0f)
+	SDLGameObject::SDLGameObject() :
+		GameObject()
 	{
+	}//SDLGameObject
+	//--------------------------------------------------------------------------
+
+	void SDLGameObject::load(const LoaderParams* params)
+	{
+		_position = Vector2D((float)params->getX(), (float)params->getY());
+		_velocity = Vector2D(0.0f, 0.0f);
+		_acceleration = Vector2D(0.0f, 0.0f);
+		
 		_width = params->getWidth();
 		_height = params->getHeight();
 		_textureID = params->getTextureID();
@@ -18,7 +25,7 @@ namespace sdlEngine
 		_currentFrame = 1;
 
 		_numFrames = params->getNumFrames();
-	}//SDLGameObject
+	}//load
 	//--------------------------------------------------------------------------
 
 	void SDLGameObject::draw()

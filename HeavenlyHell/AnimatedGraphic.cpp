@@ -4,11 +4,17 @@
 
 namespace sdlEngine
 {
-	AnimatedGraphic::AnimatedGraphic(const LoaderParams* params, int animSpeed) :
-		SDLGameObject(params),
-		_animSpeed(animSpeed)
+	AnimatedGraphic::AnimatedGraphic() : 
+		SDLGameObject()
 	{
 	}//Player
+	//--------------------------------------------------------------------------
+
+	void AnimatedGraphic::load(const LoaderParams* params)
+	{
+		SDLGameObject::load(params);
+		_animSpeed = params->getAnimSpeed();
+	}//load
 	//--------------------------------------------------------------------------
 
 	void AnimatedGraphic::draw()

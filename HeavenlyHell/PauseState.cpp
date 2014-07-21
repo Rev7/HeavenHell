@@ -1,12 +1,12 @@
 #include "PauseState.h"
 #include "HHEngine.h"
 #include "GameStateMachine.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "MenuButton.h"
-#include "LoaderParams.h"
 #include "InputHandler.h"
+#include "StateParser.h"
 
 namespace sdlEngine
 {
@@ -16,7 +16,7 @@ namespace sdlEngine
 
 	void PauseState::_pauseToMain()
 	{
-		TheHHEngine::Instance()->getStateMachine()->changeState(new MenuState());
+		TheHHEngine::Instance()->getStateMachine()->changeState(new MainMenuState());
 	}//_pauseToMain
 	//--------------------------------------------------------------------------
 
@@ -46,21 +46,14 @@ namespace sdlEngine
 
 	bool PauseState::onEnter()
 	{
-		if (!TheTextureManager::Instance()->load("assets/resume.png", "resumebutton", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
+		StateParser stateParser;
+		stateParser.parseState("test.xml", _PauseID, &_gameObjects, &_textureIDList);
 
-		if (!TheTextureManager::Instance()->load("assets/main.png", "mainbutton", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
+		_callbacks.push_back(0);
+		_callbacks.push_back(_pauseToMain);
+		_callbacks.push_back(_resumeToPlay);
 
-		GameObject* button1 = new MenuButton(new LoaderParams(200, 100, 200, 80, "mainbutton", 3), _pauseToMain);
-		GameObject* button2 = new MenuButton(new LoaderParams(200, 300, 200, 80, "resumebutton", 3), _resumeToPlay);
-
-		_gameObjects.push_back(button1);
-		_gameObjects.push_back(button2);
+		setCallbacks(_callbacks);
 
 		std::cout << "Entering PauseState\n";
 		return true;
@@ -76,12 +69,27 @@ namespace sdlEngine
 
 		_gameObjects.clear();
 
-		TheTextureManager::Instance()->clearFromTextureMap("resumebutton");
-		TheTextureManager::Instance()->clearFromTextureMap("mainbutton");
+		for (unsigned int i = 0; i < _textureIDList.size(); ++i)
+		{
+			TheTextureManager::Instance()->clearFromTextureMap(_textureIDList[i]);
+		}//for
 
 		TheInputHandler::Instance()->reset();
 
 		std::cout << "Exiting PauseState\n";
 		return true;
 	}//onExit
+	//--------------------------------------------------------------------------
+
+	void PauseState::setCallbacks(const std::vector<Callback>& callbacks)
+	{
+		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
+		{
+			if (dynamic_cast<MenuButton*>(_gameObjects[i]))
+			{
+				MenuButton* button = dynamic_cast<MenuButton*>(_gameObjects[i]);
+				button->setCallback(callbacks[button->getCallbackID()]);
+			}//if
+		}//for
+	}//setCallbacks
 }

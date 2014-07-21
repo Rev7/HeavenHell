@@ -3,8 +3,13 @@
 #include "InputHandler.h"
 #include "LoaderParams.h"
 #include "GameStateMachine.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "PlayState.h"
+#include "GameObjectFactory.h"
+#include "MenuButton.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "AnimatedGraphic.h"
 
 using namespace tools;
 
@@ -43,19 +48,18 @@ namespace sdlEngine
 					
 					SDL_SetRenderDrawColor(_mainRenderer, 0, 0, 0, 0);
 
-					// Chargement des textures
-					if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", _mainRenderer))
-					{
-						std::cout << "### Texture load fail\n";
-						return false;	// !!! !!! !!!
-					}//if
+					// Enregistrer les types objet
+					TheGameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
+					TheGameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
+					TheGameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
+					TheGameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 
 					// Initialisation des Joysticks
 					TheInputHandler::Instance()->initialiseJoysticks();
 
 					// FSM : Final state machines
 					_gameStateMachine = new GameStateMachine();
-					_gameStateMachine->pushState(new MenuState());
+					_gameStateMachine->pushState(new MainMenuState());
 				}//if
 				else
 				{

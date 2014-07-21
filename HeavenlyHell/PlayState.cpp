@@ -4,12 +4,12 @@
 #include "TextureManager.h"
 #include "HHEngine.h"
 #include "Player.h"
-#include "LoaderParams.h"
 #include "InputHandler.h"
 #include "GameStateMachine.h"
 #include "PauseState.h"
 #include "Enemy.h"
 #include "GameOverState.h"
+#include "StateParser.h"
 
 using namespace tools;
 
@@ -49,21 +49,8 @@ namespace sdlEngine
 
 	bool PlayState::onEnter()
 	{
-		if (!TheTextureManager::Instance()->load("assets/helicopter.png", "helicopter", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
-
-		if (!TheTextureManager::Instance()->load("assets/helicopter2.png", "helicopter2", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
-
-		GameObject* player = new Player(new LoaderParams(500, 100, 128, 55, "helicopter", 5));
-		GameObject* enemy = new Enemy(new LoaderParams(100, 100, 128, 55, "helicopter2", 5));
-
-		_gameObjects.push_back(player);
-		_gameObjects.push_back(enemy);
+		StateParser stateParser;
+		stateParser.parseState("test.xml", _PlayID, &_gameObjects, &_textureIDList);
 		
 		std::cout << "Entering PlayState\n";
 		return true;
@@ -79,8 +66,10 @@ namespace sdlEngine
 
 		_gameObjects.clear();
 
-		TheTextureManager::Instance()->clearFromTextureMap("helicopter");
-		TheTextureManager::Instance()->clearFromTextureMap("helicopter2");
+		for (unsigned int i = 0; i < _textureIDList.size(); ++i)
+		{
+			TheTextureManager::Instance()->clearFromTextureMap(_textureIDList[i]);
+		}//for
 
 		std::cout << "Exiting PlayState\n";
 		return true;

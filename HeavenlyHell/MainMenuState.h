@@ -7,7 +7,7 @@ namespace sdlEngine
 {
 	class GameObject;
 
-	class GameOverState : public MenuState
+	class MainMenuState : public MenuState
 	{
 	public:
 		virtual void update();
@@ -16,17 +16,17 @@ namespace sdlEngine
 		virtual bool onEnter();
 		virtual bool onExit();
 
-		virtual std::string getStateID() const { return _GameOverID; }
+		virtual std::string getStateID() const { return _MenuID; }
 
 	private:
 		virtual void setCallbacks(const std::vector<Callback>& callbacks);
 
-		static const std::string _GameOverID;
+		static const std::string _MenuID;
 
 		std::vector<GameObject*> _gameObjects;
 
 		// callbacks
-		static void _gameOverToMain();
-		static void _restartPlay();
+		static void _menuToPlay();
+		static void _exitFromMenu();
 	};
 }

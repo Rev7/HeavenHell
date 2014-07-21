@@ -3,13 +3,18 @@
 
 namespace sdlEngine
 {
-	Enemy::Enemy(const LoaderParams* params) :
-		SDLGameObject(params),
-		_numFrames(5)
+	Enemy::Enemy() :
+		SDLGameObject()
 	{
+	}//Player
+	//--------------------------------------------------------------------------
+
+	void Enemy::load(const LoaderParams* params)
+	{
+		SDLGameObject::load(params);
 		_velocity.setY(2.0f);
 		_velocity.setX(0.001f);
-	}//Player
+	}//load
 	//--------------------------------------------------------------------------
 
 	void Enemy::draw()

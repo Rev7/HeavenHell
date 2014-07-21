@@ -3,10 +3,16 @@
 
 namespace sdlEngine
 {
-	Player::Player(const LoaderParams* params) :
-		SDLGameObject(params)
+	Player::Player() :
+		SDLGameObject()
 	{
 	}//Player
+	//--------------------------------------------------------------------------
+
+	void Player::load(const LoaderParams* params)
+	{
+		SDLGameObject::load(params);
+	}//load
 	//--------------------------------------------------------------------------
 
 	void Player::draw()

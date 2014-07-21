@@ -57,10 +57,12 @@ namespace sdlEngine
 		}//create
 
 	private:
+		GameObjectFactory() {}
+		~GameObjectFactory() {}
+
 		static GameObjectFactory* _instance;
 		std::map<std::string, BaseCreator*> _creators;
 	};
 
-	GameObjectFactory* GameObjectFactory::_instance = NULL;
 	typedef GameObjectFactory TheGameObjectFactory;
 }

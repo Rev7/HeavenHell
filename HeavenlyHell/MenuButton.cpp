@@ -4,12 +4,20 @@
 
 namespace sdlEngine
 {
-	MenuButton::MenuButton(const LoaderParams* params, void (*callback)()) :
-		SDLGameObject(params),
-		_callback(callback)
+	MenuButton::MenuButton() :
+		SDLGameObject(),
+		_callback(NULL),
+		_released(true)
 	{
-		_currentFrame = MOUSE_OUT;
 	}//MenuButton
+	//---------------------------------------------------------------------------
+
+	void MenuButton::load(const LoaderParams* params)
+	{
+		SDLGameObject::load(params);
+		_callbackID = params->getCallbackID();
+		_currentFrame = MOUSE_OUT;
+	}//load
 	//---------------------------------------------------------------------------
 
 	void MenuButton::draw()
@@ -32,7 +40,10 @@ namespace sdlEngine
 				_released = false;
 				_currentFrame = CLICKED;
 
-				_callback();
+				if (_callback != NULL)
+				{
+					_callback();
+				}//if
 			}//if
 			else if (!TheInputHandler::Instance()->getMouseButtonState(LEFT))
 			{

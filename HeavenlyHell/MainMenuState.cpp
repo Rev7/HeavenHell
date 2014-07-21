@@ -1,20 +1,20 @@
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "Tools.h"
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "HHEngine.h"
 #include "MenuButton.h"
-#include "LoaderParams.h"
 #include "GameStateMachine.h"
 #include "PlayState.h"
+#include "StateParser.h"
 
 namespace sdlEngine
 {
-	const std::string MenuState::_MenuID = "MENU";
+	const std::string MainMenuState::_MenuID = "MENU";
 
 	//--------------------------------------------------------------------------
 
-	void MenuState::update()
+	void MainMenuState::update()
 	{
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
@@ -23,7 +23,7 @@ namespace sdlEngine
 	}//update
 	//--------------------------------------------------------------------------
 
-	void MenuState::render()
+	void MainMenuState::render()
 	{
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
@@ -32,30 +32,23 @@ namespace sdlEngine
 	}//render
 	//--------------------------------------------------------------------------
 
-	bool MenuState::onEnter()
+	bool MainMenuState::onEnter()
 	{
-		if (!TheTextureManager::Instance()->load("assets/button.png", "playbutton", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
+		StateParser stateParser;
+		stateParser.parseState("test.xml", _MenuID, &_gameObjects, &_textureIDList);
 
-		if (!TheTextureManager::Instance()->load("assets/exit.png", "exitbutton", TheHHEngine::Instance()->getRenderer()))
-		{
-			return false;	// !!! !!! !!!
-		}//if
+		_callbacks.push_back(0);
+		_callbacks.push_back(_menuToPlay);
+		_callbacks.push_back(_exitFromMenu);
 
-		GameObject* button1 = new MenuButton(new LoaderParams(100, 100, 400, 100, "playbutton", 3), _menuToPlay);
-		GameObject* button2 = new MenuButton(new LoaderParams(100, 300, 400, 100, "exitbutton", 3), _exitFromMenu);
-
-		_gameObjects.push_back(button1);
-		_gameObjects.push_back(button2);
+		setCallbacks(_callbacks);
 
 		std::cout << "Entering MenuState\n";
 		return true;
 	}//onEnter
 	//--------------------------------------------------------------------------
 
-	bool MenuState::onExit()
+	bool MainMenuState::onExit()
 	{
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
@@ -64,21 +57,36 @@ namespace sdlEngine
 
 		_gameObjects.clear();
 
-		TheTextureManager::Instance()->clearFromTextureMap("playbutton");
-		TheTextureManager::Instance()->clearFromTextureMap("exitbutton");
+		for (unsigned int i = 0; i < _textureIDList.size(); ++i)
+		{
+			TheTextureManager::Instance()->clearFromTextureMap(_textureIDList[i]);
+		}//for
 
 		std::cout << "Exiting MenuState\n";
 		return true;
 	}//onExit
 	//--------------------------------------------------------------------------
 
-	void MenuState::_menuToPlay()
+	void MainMenuState::setCallbacks(const std::vector<Callback>& callbacks)
+	{
+		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
+		{
+			if (dynamic_cast<MenuButton*>(_gameObjects[i]))
+			{
+				MenuButton* button = dynamic_cast<MenuButton*>(_gameObjects[i]);
+				button->setCallback(callbacks[button->getCallbackID()]);
+			}//if
+		}//for
+	}//setCallbacks
+	//--------------------------------------------------------------------------
+
+	void MainMenuState::_menuToPlay()
 	{
 		TheHHEngine::Instance()->getStateMachine()->changeState(new PlayState());
 	}//_menuToPlay
 	//--------------------------------------------------------------------------
 
-	void MenuState::_exitFromMenu()
+	void MainMenuState::_exitFromMenu()
 	{
 		TheHHEngine::Instance()->quit();
 	}//_exitFromMenu
