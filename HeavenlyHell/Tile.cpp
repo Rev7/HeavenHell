@@ -2,7 +2,10 @@
 
 namespace Model
 {
-	Tile::Tile(void) {}
+	Tile::Tile(unsigned int index) 
+	{
+		_index = index;
+	}
 	//--------------------------------------------------------------------------
 
 	Tile::~Tile(void) {}

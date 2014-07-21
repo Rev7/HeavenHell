@@ -5,8 +5,15 @@ namespace Model
 	class Tile
 	{
 	public:
-		Tile(void);
+		Tile(unsigned int index);
 		~Tile(void);
+
+		// Getters & Setters
+		unsigned int getIndex() const { return _index; };
+		void setIndex(unsigned int index) { _index = index; };
+
+	private:
+		unsigned int _index;
 	};
 
 }

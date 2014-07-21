@@ -15,7 +15,10 @@ namespace Model{
 
 			for (unsigned int j = 0; j < col_count; ++j) 
 			{
-				Tile cell = Tile();
+				// Index de la tile
+				unsigned int tileIndex = i * col_count + j;
+				
+				Tile cell = Tile(tileIndex);
 				current_row.push_back(cell);
 			}
 

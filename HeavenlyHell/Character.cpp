@@ -4,11 +4,10 @@ namespace Model
 {
 	unsigned int Character::_id = 0;	// identifiant d'un personnage
 	
-	Character::Character(unsigned int x, unsigned int y) 
+	Character::Character(unsigned int tileIndex) 
 	{
 		_id = Character::_getId();
-		_x = x;
-		_y = y;
+		_tileIndex = tileIndex;
 	}
 	//--------------------------------------------------------------------------
 	
