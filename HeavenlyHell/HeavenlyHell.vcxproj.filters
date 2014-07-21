@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\TinyXML">
-      <UniqueIdentifier>{44c20a2f-b5a3-4ac9-ad21-0022d5e8bfe7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\GameStates">
       <UniqueIdentifier>{54a5351a-3cd9-417a-a0e7-1f7e434ac89a}</UniqueIdentifier>
     </Filter>
@@ -28,14 +25,41 @@
     <Filter Include="Fichiers sources\GameStates">
       <UniqueIdentifier>{4a8b5656-6561-460b-8521-fef63f2ea269}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\TinyXML">
-      <UniqueIdentifier>{94294360-3732-4030-99a6-e6f3ed41497c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\GameStates\Base">
       <UniqueIdentifier>{b2a6d183-eb4b-4b1e-98c8-ab8dae5ffadc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\GameObjects\Base">
       <UniqueIdentifier>{ccb6fb9c-4a4e-4db9-b92a-1258f9983c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\GameObjects\Base">
+      <UniqueIdentifier>{700121fa-4802-4467-9497-9584035d1050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Level">
+      <UniqueIdentifier>{f480236e-a86d-467b-8e1c-1c2b617c3170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Level">
+      <UniqueIdentifier>{02bbefa7-addb-4bc3-8612-814274f6157f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Level\Base">
+      <UniqueIdentifier>{e403da00-8409-42ed-be31-26ea75653017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tools">
+      <UniqueIdentifier>{87c1186a-17ee-4588-982d-89601c9026e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tools\TinyXML">
+      <UniqueIdentifier>{44c20a2f-b5a3-4ac9-ad21-0022d5e8bfe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tools\base64">
+      <UniqueIdentifier>{505c2a83-42a6-479b-9601-8e7bb382c4dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tools">
+      <UniqueIdentifier>{93a8f97c-f3fa-492a-b0ed-b61fc9bdc60d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tools\TinyXML">
+      <UniqueIdentifier>{94294360-3732-4030-99a6-e6f3ed41497c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tools\base64">
+      <UniqueIdentifier>{3f84c3f1-c6fc-4a15-a04f-340b020bb143}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,29 +69,20 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Tools.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="LoaderParams.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="tinyXML\tinystr.h">
-      <Filter>Fichiers d%27en-tête\TinyXML</Filter>
+      <Filter>Fichiers d%27en-tête\Tools\TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="tinyXML\tinyxml.h">
-      <Filter>Fichiers d%27en-tête\TinyXML</Filter>
+      <Filter>Fichiers d%27en-tête\Tools\TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Fichiers d%27en-tête\GameObjects</Filter>
@@ -79,9 +94,6 @@
       <Filter>Fichiers d%27en-tête\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.h">
-      <Filter>Fichiers d%27en-tête\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuState.h">
       <Filter>Fichiers d%27en-tête\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
@@ -108,8 +120,41 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Fichiers d%27en-tête\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Fichiers d%27en-tête\GameStates\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="StateParser.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelParser.h">
+      <Filter>Fichiers d%27en-tête\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Fichiers d%27en-tête\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Fichiers d%27en-tête\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TileLayer.h">
+      <Filter>Fichiers d%27en-tête\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Fichiers d%27en-tête\Level\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="base64.h">
+      <Filter>Fichiers d%27en-tête\Tools\base64</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>Fichiers d%27en-tête\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Fichiers d%27en-tête\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="LoaderParams.h">
+      <Filter>Fichiers d%27en-tête\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,13 +188,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Fichiers sources\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="SDLGameObject.cpp">
-      <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverState.cpp">
-      <Filter>Fichiers sources\GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuState.cpp">
       <Filter>Fichiers sources\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="PauseState.cpp">
@@ -159,22 +198,46 @@
       <Filter>Fichiers sources\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="tinyXML\tinystr.cpp">
-      <Filter>Fichiers sources\TinyXML</Filter>
+      <Filter>Fichiers sources\Tools\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyXML\tinyxml.cpp">
-      <Filter>Fichiers sources\TinyXML</Filter>
+      <Filter>Fichiers sources\Tools\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyXML\tinyxmlerror.cpp">
-      <Filter>Fichiers sources\TinyXML</Filter>
+      <Filter>Fichiers sources\Tools\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyXML\tinyxmlparser.cpp">
-      <Filter>Fichiers sources\TinyXML</Filter>
+      <Filter>Fichiers sources\Tools\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
+    <ClCompile Include="SDLGameObject.cpp">
+      <Filter>Fichiers sources\GameObjects\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Fichiers sources\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="StateParser.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Fichiers sources\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelParser.cpp">
+      <Filter>Fichiers sources\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Fichiers sources\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TileLayer.cpp">
+      <Filter>Fichiers sources\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="base64.cpp">
+      <Filter>Fichiers sources\Tools\base64</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
