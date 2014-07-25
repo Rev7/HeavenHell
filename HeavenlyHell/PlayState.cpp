@@ -10,7 +10,7 @@
 #include "Enemy.h"
 #include "GameOverState.h"
 #include "StateParser.h"
-//#include "LevelParser.h"
+#include "LevelParser.h"
 
 using namespace tools;
 
@@ -26,7 +26,7 @@ namespace sdlEngine
 		{
 			TheHHEngine::Instance()->getStateMachine()->pushState(new PauseState());
 		}//if
-
+/*
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
 			_gameObjects[i]->update();
@@ -36,30 +36,30 @@ namespace sdlEngine
 		{
 			TheHHEngine::Instance()->getStateMachine()->pushState(new GameOverState());
 		}//if
-/**/
-		//_level->update();
+*/
+		_level->update();
 	}//update
 	//--------------------------------------------------------------------------
 
 	void PlayState::render()
 	{
-
+/*
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
 			_gameObjects[i]->draw();
 		}//for
-/**/
-		//_level->render();
+*/
+		_level->render();
 	}//render
 	//--------------------------------------------------------------------------
 
 	bool PlayState::onEnter()
 	{
-		StateParser stateParser;
-		stateParser.parseState("test.xml", _PlayID, &_gameObjects, &_textureIDList);
+		//StateParser stateParser;
+		//stateParser.parseState("test.xml", _PlayID, &_gameObjects, &_textureIDList);
 
-		//LevelParser levelParser;
-		//_level = levelParser.parseLevel("assets/map1.tmx");
+		LevelParser levelParser;
+		_level = levelParser.parseLevel("assets/map1.tmx");
 
 		TheInputHandler::Instance()->reset();
 		
@@ -70,7 +70,7 @@ namespace sdlEngine
 
 	bool PlayState::onExit()
 	{
-
+/*
 		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
 		{
 			_gameObjects[i]->clean();
@@ -82,7 +82,7 @@ namespace sdlEngine
 		{
 			TheTextureManager::Instance()->clearFromTextureMap(_textureIDList[i]);
 		}//for
-/**/
+*/
 		std::cout << "Exiting PlayState\n";
 		return true;
 	}//onExit

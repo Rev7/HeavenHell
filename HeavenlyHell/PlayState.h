@@ -1,13 +1,14 @@
 #pragma once
 
 #include "GameState.h"
+#include "Level.h"
 #include <vector>
 
 namespace sdlEngine
 {
 	class GameObject;
 	class SDLGameObject;
-	//class Level;
+	class Level;
 
 	class PlayState : public GameState
 	{
@@ -26,6 +27,6 @@ namespace sdlEngine
 		static const std::string _PlayID;
 
 		std::vector<GameObject*> _gameObjects;
-		//* _level;
+		Level* _level;
 	};
 }
