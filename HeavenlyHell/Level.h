@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "LevelParser.h"
 
 namespace sdlEngine
 {

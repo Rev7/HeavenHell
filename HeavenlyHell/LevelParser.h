@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Level.h"
 #include "tinyXML.h"
 #include <vector>
 
 namespace sdlEngine
 {
 	class Layer;
+	class Level;
+	struct Tileset;
 
 	class LevelParser
 	{

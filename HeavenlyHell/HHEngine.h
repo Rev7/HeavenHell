@@ -31,9 +31,11 @@ namespace sdlEngine
 		bool running() const { return _running; }
 		SDL_Renderer* getRenderer() const { return _mainRenderer; }
 		GameStateMachine* getStateMachine() { return _gameStateMachine; }
+		int getGameWidth() const { return _gameWidth; }
+		int getGameHeight() const { return _gameHeight; }
 	
 	private:
-		HHEngine(void) {}
+		HHEngine(void);
 		~HHEngine(void) {}
 
 		static HHEngine* _instance;
@@ -42,6 +44,8 @@ namespace sdlEngine
 		SDL_Renderer* _mainRenderer;
 
 		bool _running;
+		int _gameWidth;
+		int _gameHeight;
 
 		GameStateMachine* _gameStateMachine;
 	};

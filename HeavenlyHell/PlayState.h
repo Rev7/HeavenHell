@@ -7,6 +7,7 @@ namespace sdlEngine
 {
 	class GameObject;
 	class SDLGameObject;
+	//class Level;
 
 	class PlayState : public GameState
 	{
@@ -25,5 +26,6 @@ namespace sdlEngine
 		static const std::string _PlayID;
 
 		std::vector<GameObject*> _gameObjects;
+		//* _level;
 	};
 }

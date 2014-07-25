@@ -19,8 +19,18 @@ namespace sdlEngine
 
 	//---------------------------------------------------------------------------
 
+	HHEngine::HHEngine(void) :
+		_gameWidth(0),
+		_gameHeight(0)
+	{
+	}//HHEngine
+	//---------------------------------------------------------------------------
+	
 	bool HHEngine::init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen)
 	{
+		_gameWidth = width;
+		_gameHeight = height;
+		
 		// Initialisation SDL
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{

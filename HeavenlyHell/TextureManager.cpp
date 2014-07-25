@@ -74,6 +74,24 @@ namespace sdlEngine
 		}//if
 	}//drawFrame
 	//---------------------------------------------------------------------------
+	
+	void TextureManager::drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer)
+	{
+		SDL_Rect srcRect;
+		SDL_Rect destRect;
+		srcRect.x = margin + (spacing + width) * currentFrame;
+		srcRect.y = margin + (spacing + height) * currentRow;
+		srcRect.w = destRect.w = width;
+		srcRect.h = destRect.h = height;
+		destRect.x = x;
+		destRect.y = y;
+
+		if (SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE) != 0)
+		{
+			Tools::logSDLError(std::cout, "SDL_RenderCopyEx");
+		}//if
+	}//drawTile
+	//---------------------------------------------------------------------------
 
 	void TextureManager::clearFromTextureMap(std::string id)
 	{
