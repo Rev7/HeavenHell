@@ -179,9 +179,6 @@
     <ClCompile Include="AnimatedGraphic.cpp">
       <Filter>Fichiers sources\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="MenuButton.cpp">
       <Filter>Fichiers sources\GameObjects</Filter>
     </ClCompile>

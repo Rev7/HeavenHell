@@ -116,7 +116,6 @@
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="HHEngine.cpp" />
