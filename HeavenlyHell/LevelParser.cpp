@@ -10,6 +10,7 @@ namespace sdlEngine
 {
 	LevelParser::LevelParser()
 	{
+
 	}//LevelParser
 	//---------------------------------------------------------------------------
 
