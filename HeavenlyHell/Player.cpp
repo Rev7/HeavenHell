@@ -42,9 +42,6 @@ namespace sdlEngine
 
 	void Player::handleInput()
 	{
-		Vector2D* target = TheInputHandler::Instance()->getMousePosition();
 
-		_velocity = *target - _position;
-		_velocity /= 50;
 	}//handleInput
 }
