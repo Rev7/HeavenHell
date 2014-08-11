@@ -17,6 +17,10 @@ namespace sdlEngine
 
 	private:
 		void handleInput();
+
+		Vector2D _gravity;
+		Vector2D* _pTarget;
+		Vector2D _target;
 	};
 
 	class PlayerCreator : public BaseCreator

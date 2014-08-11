@@ -6,6 +6,9 @@ namespace sdlEngine
 	Player::Player() :
 		SDLGameObject()
 	{
+		_pTarget = TheInputHandler::Instance()->getMousePosition();
+		_target = *_pTarget;
+		_gravity = _position + Vector2D(_width / 2, _height / 2);
 	}//Player
 	//--------------------------------------------------------------------------
 
@@ -23,8 +26,11 @@ namespace sdlEngine
 
 	void Player::update()
 	{
-		_velocity.setX(0);
-		_velocity.setY(0);
+		//_velocity.setX(0);
+		//_velocity.setY(0);
+		_velocity.setX(0.1);
+
+		_velocity = (_target - _position) / 100;
 
 		handleInput();
 
@@ -42,6 +48,19 @@ namespace sdlEngine
 
 	void Player::handleInput()
 	{
+		static bool bClicked = false;
+		if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && bClicked)
+		{			
+			_pTarget = TheInputHandler::Instance()->getMousePosition();
+			_target = *_pTarget;
 
+			//_velocity = (_target / 200);
+
+			bClicked = false;
+		}//if
+		else if (TheInputHandler::Instance()->getMouseButtonState(LEFT))
+		{
+			bClicked = true;
+		}//else if
 	}//handleInput
 }

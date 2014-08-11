@@ -8,6 +8,7 @@
 #include "GameStateMachine.h"
 #include "StateParser.h"
 #include "LevelParser.h"
+#include "LoaderParams.h"
 
 using namespace tools;
 
@@ -19,18 +20,41 @@ namespace sdlEngine
 
 	void PlayState::update()
 	{
+		_level->update();
 
+		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
+		{
+			_gameObjects[i]->update();
+		}//for
 	}//update
 	//--------------------------------------------------------------------------
 
 	void PlayState::render()
 	{
+		TheTextureManager::Instance()->draw("playBackground", 0, 0, 1024, 768, TheHHEngine::Instance()->getRenderer());
 
+		_level->render();
+
+		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
+		{
+			_gameObjects[i]->draw();
+		}//for
 	}//render
 	//--------------------------------------------------------------------------
 
 	bool PlayState::onEnter()
 	{
+		LevelParser levelParser;
+		_level = levelParser.parseLevel("assets/map3.tmx");
+		
+		TheTextureManager::Instance()->load("assets/playBackground.png", "playBackground", TheHHEngine::Instance()->getRenderer());
+		TheTextureManager::Instance()->load("assets/verylittledevil.png", "littledevil", TheHHEngine::Instance()->getRenderer());
+
+		GameObject* littledevil = TheGameObjectFactory::Instance()->create("Player");
+		littledevil->load(new LoaderParams(100, 100, 64, 64, "littledevil", 1));
+
+		_gameObjects.push_back(littledevil);
+
 		std::cout << "Entering PlayState\n";
 		return true;
 	}//onEnter
