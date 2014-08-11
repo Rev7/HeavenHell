@@ -84,26 +84,11 @@
     <ClInclude Include="tinyXML\tinyxml.h">
       <Filter>Fichiers d%27en-tête\Tools\TinyXML</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedGraphic.h">
-      <Filter>Fichiers d%27en-tête\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Fichiers d%27en-tête\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverState.h">
-      <Filter>Fichiers d%27en-tête\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseState.h">
-      <Filter>Fichiers d%27en-tête\GameStates</Filter>
-    </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Fichiers d%27en-tête\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButton.h">
-      <Filter>Fichiers d%27en-tête\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête\GameObjects\Base</Filter>
@@ -119,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuState.h">
-      <Filter>Fichiers d%27en-tête\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="MenuState.h">
       <Filter>Fichiers d%27en-tête\GameStates\Base</Filter>
@@ -156,6 +138,9 @@
     <ClInclude Include="LoaderParams.h">
       <Filter>Fichiers d%27en-tête\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HHEngine.cpp">
@@ -176,23 +161,8 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedGraphic.cpp">
-      <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
-      <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Fichiers sources\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverState.cpp">
-      <Filter>Fichiers sources\GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="PauseState.cpp">
-      <Filter>Fichiers sources\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Fichiers sources\GameStates</Filter>
@@ -215,9 +185,6 @@
     <ClCompile Include="SDLGameObject.cpp">
       <Filter>Fichiers sources\GameObjects\Base</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
-      <Filter>Fichiers sources\GameStates</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -239,5 +206,11 @@
     <ClCompile Include="base64.cpp">
       <Filter>Fichiers sources\Tools\base64</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

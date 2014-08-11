@@ -6,9 +6,6 @@
 #include "Player.h"
 #include "InputHandler.h"
 #include "GameStateMachine.h"
-#include "PauseState.h"
-#include "Enemy.h"
-#include "GameOverState.h"
 #include "StateParser.h"
 #include "LevelParser.h"
 
@@ -22,47 +19,18 @@ namespace sdlEngine
 
 	void PlayState::update()
 	{
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
-		{
-			TheHHEngine::Instance()->getStateMachine()->pushState(new PauseState());
-		}//if
-/*
-		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
-		{
-			_gameObjects[i]->update();
-		}//for
 
-		if (checkCollision(dynamic_cast<SDLGameObject*>(_gameObjects[0]), dynamic_cast<SDLGameObject*>(_gameObjects[1])))
-		{
-			TheHHEngine::Instance()->getStateMachine()->pushState(new GameOverState());
-		}//if
-*/
-		_level->update();
 	}//update
 	//--------------------------------------------------------------------------
 
 	void PlayState::render()
 	{
-/*
-		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
-		{
-			_gameObjects[i]->draw();
-		}//for
-*/
-		_level->render();
+
 	}//render
 	//--------------------------------------------------------------------------
 
 	bool PlayState::onEnter()
 	{
-		//StateParser stateParser;
-		//stateParser.parseState("test.xml", _PlayID, &_gameObjects, &_textureIDList);
-
-		LevelParser levelParser;
-		_level = levelParser.parseLevel("assets/map1.tmx");
-
-		TheInputHandler::Instance()->reset();
-		
 		std::cout << "Entering PlayState\n";
 		return true;
 	}//onEnter
@@ -70,19 +38,6 @@ namespace sdlEngine
 
 	bool PlayState::onExit()
 	{
-/*
-		for (unsigned int i = 0; i < _gameObjects.size(); ++i)
-		{
-			_gameObjects[i]->clean();
-		}//for
-
-		_gameObjects.clear();
-
-		for (unsigned int i = 0; i < _textureIDList.size(); ++i)
-		{
-			TheTextureManager::Instance()->clearFromTextureMap(_textureIDList[i]);
-		}//for
-*/
 		std::cout << "Exiting PlayState\n";
 		return true;
 	}//onExit
