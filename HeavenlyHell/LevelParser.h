@@ -20,6 +20,8 @@ namespace sdlEngine
 	private:
 		void parseTilesets(TiXmlElement* tilesetRoot, std::vector<Tileset>* tilesets);
 		void parseTileLayer(TiXmlElement* tileElement, std::vector<Layer*>* layers, const std::vector<Tileset>* tilesets);
+		void parseTextures(TiXmlElement* textureRoot);
+		void parseObjectLayer(TiXmlElement* objectElement, std::vector<Layer*>* layers);
 
 		int _tileSize;
 		int _width;
