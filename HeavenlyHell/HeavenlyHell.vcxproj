@@ -80,6 +80,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelParser.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="ObjectLayer.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateParser.h" />
     <ClInclude Include="Tile.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelParser.cpp" />
+    <ClCompile Include="ObjectLayer.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StateParser.cpp" />
     <ClCompile Include="Tile.cpp" />

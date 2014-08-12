@@ -141,6 +141,9 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectLayer.h">
+      <Filter>Fichiers d%27en-tête\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HHEngine.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLayer.cpp">
+      <Filter>Fichiers sources\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
