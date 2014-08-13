@@ -1,34 +1,22 @@
-#include "SDLGameObject.h"
+#include "ShooterObject.h"
 #include "LoaderParams.h"
 #include "TextureManager.h"
 #include "HHEngine.h"
 
 namespace sdlEngine
 {
-	SDLGameObject::SDLGameObject() :
+	ShooterObject::ShooterObject() :
 		GameObject()
 	{
 	}//SDLGameObject
 	//--------------------------------------------------------------------------
 
-	void SDLGameObject::load(const LoaderParams* params)
+	void ShooterObject::load(std::unique_ptr<LoaderParams> const &params)
 	{
-		_position = Vector2D((float)params->getX(), (float)params->getY());
-		_velocity = Vector2D(0.0f, 0.0f);
-		_acceleration = Vector2D(0.0f, 0.0f);
-		
-		_width = params->getWidth();
-		_height = params->getHeight();
-		_textureID = params->getTextureID();
-
-		_currentRow = 1;
-		_currentFrame = 1;
-
-		_numFrames = params->getNumFrames();
 	}//load
 	//--------------------------------------------------------------------------
 
-	void SDLGameObject::draw()
+	void ShooterObject::draw()
 	{
 		if (_velocity.getX() > 0)
 		{
@@ -41,15 +29,23 @@ namespace sdlEngine
 	}//draw
 	//--------------------------------------------------------------------------
 
-	void SDLGameObject::update()
+	void ShooterObject::update()
 	{
 		_velocity += _acceleration;
 		_position += _velocity;
 	}//update
 	//--------------------------------------------------------------------------
-	
-	void SDLGameObject::clean()
-	{
 
-	}//clean
+	void ShooterObject::doDyingAnimation()
+	{
+		scroll(TheHHEngine::Instance()->getScrollSpeed());
+
+		_currentFrame = int(((SDL_GetTicks() / (1000 / 3)) % _numFrames));
+
+		if (_dyingCounter == _dyingTime)
+		{
+			_dead = true;
+		}//if
+		_dyingCounter++;
+	}//doDyingAnimation
 }

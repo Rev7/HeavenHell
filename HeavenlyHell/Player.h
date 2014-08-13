@@ -1,22 +1,26 @@
 #pragma once
 
-#include "SDLGameObject.h"
+#include "ShooterObject.h"
 #include "GameObjectFactory.h"
 
 namespace sdlEngine
 {
-	class Player : public SDLGameObject
+	class Player : public ShooterObject
 	{
 	public:
 		Player();
+		virtual ~Player();
 
-		virtual void load(const LoaderParams* params);
-		virtual void draw();
 		virtual void update();
-		virtual void clean();
 
 	private:
+		void resurrect();
 		void handleInput();
+		void handleAnimation();
+
+		bool _invulnerable;
+		int _invulnerableTime;
+		int _invulnerableCounter;
 	};
 
 	class PlayerCreator : public BaseCreator

@@ -93,9 +93,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête\GameObjects\Base</Filter>
     </ClInclude>
-    <ClInclude Include="SDLGameObject.h">
-      <Filter>Fichiers d%27en-tête\GameObjects\Base</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Fichiers d%27en-tête\GameStates\Base</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
     <ClInclude Include="ObjectLayer.h">
       <Filter>Fichiers d%27en-tête\Level</Filter>
     </ClInclude>
+    <ClInclude Include="ShooterObject.h">
+      <Filter>Fichiers d%27en-tête\GameObjects\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HHEngine.cpp">
@@ -185,9 +185,6 @@
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="SDLGameObject.cpp">
-      <Filter>Fichiers sources\GameObjects\Base</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -214,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="ObjectLayer.cpp">
       <Filter>Fichiers sources\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ShooterObject.cpp">
+      <Filter>Fichiers sources\GameObjects\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

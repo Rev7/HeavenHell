@@ -27,6 +27,8 @@ namespace sdlEngine
 		void clean();
 		void quit();
 
+		void setCurrentLevel(int currentLevel);
+
 		// Accesseurs
 		bool running() const { return _running; }
 		SDL_Renderer* getRenderer() const { return _mainRenderer; }
@@ -44,8 +46,10 @@ namespace sdlEngine
 		SDL_Renderer* _mainRenderer;
 
 		bool _running;
+		bool _levelComplete;
 		int _gameWidth;
 		int _gameHeight;
+		int _currentLevel;
 
 		GameStateMachine* _gameStateMachine;
 	};

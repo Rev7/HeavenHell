@@ -142,4 +142,12 @@ namespace sdlEngine
 	{
 		_running = false;
 	}//quit
+	//---------------------------------------------------------------------------
+
+	void HHEngine::setCurrentLevel(int currentLevel)
+	{
+		_currentLevel = currentLevel;
+		_gameStateMachine->changeState(new BetweenLevelState());
+		_levelComplete = false;
+	}//setCurrentLevel
 }

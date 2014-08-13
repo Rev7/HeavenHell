@@ -56,19 +56,24 @@ namespace sdlEngine
 	}//draw
 	//---------------------------------------------------------------------------
 	
-	void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip)
+	void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* renderer, double angle, int alpha, SDL_RendererFlip flip)
 	{
 		SDL_Rect srcRect;
 		SDL_Rect destRect;
 
 		srcRect.x = width * currentFrame;
-		srcRect.y = height * (currentRow - 1);
+		srcRect.y = height * currentRow;
 		srcRect.w = destRect.w = width;
 		srcRect.h = destRect.h = height;
 		destRect.x = x;
 		destRect.y = y;
 
-		if (SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, 0, 0, flip) != 0)
+		if (SDL_SetTextureAlphaMod(_textureMap[id], alpha) != 0)
+		{
+			Tools::logSDLError(std::cout, "SDL_SetTextureAlphaMod");
+		}//if
+
+		if (SDL_RenderCopyEx(renderer, _textureMap[id], &srcRect, &destRect, angle, 0, flip) != 0)
 		{
 			Tools::logSDLError(std::cout, "SDL_RenderCopyEx");
 		}//if
