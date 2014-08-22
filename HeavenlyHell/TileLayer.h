@@ -18,6 +18,7 @@ namespace sdlEngine
 
 		Tileset getTilesetByID(int tileID);
 
+		int getTileSize() const { return _tileSize; }
 		void setTileSize(int tileSize) { _tileSize = tileSize; }
 		void setTileIDs(const std::vector<std::vector<int>>& data) { _tileIDs = data; }
 

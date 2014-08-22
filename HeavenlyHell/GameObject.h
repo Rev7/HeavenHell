@@ -19,6 +19,7 @@ namespace sdlEngine
 		virtual std::string type() = 0;
 
 		Vector2D& getPosition() { return _position; }
+		Vector2D& getVelocity() { return _velocity; }
 		int getWidth() { return _width; }
 		int getHeight() { return _height; }
 

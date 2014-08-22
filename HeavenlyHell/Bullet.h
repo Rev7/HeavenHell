@@ -48,4 +48,16 @@ namespace sdlEngine
 	private:
 		Vector2D _heading;
 	};
+
+	class EnemyBullet : public PlayerBullet
+	{
+	public:
+		EnemyBullet() : PlayerBullet()
+		{
+		}//EnemyBullet
+
+		virtual ~EnemyBullet() {}
+
+		virtual std::string type() { return "EnemyBullet"; }
+	};
 }

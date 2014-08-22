@@ -7,6 +7,7 @@
 namespace sdlEngine
 {
 	class Layer;
+	class Player;
 
 	struct Tileset
 	{
@@ -32,6 +33,9 @@ namespace sdlEngine
 		// Accesseurs
 		std::vector<Tileset>* getTilesets() { return &_tilesets; }
 		std::vector<Layer*>* getLayers() { return &_layers; }
+		std::vector<Layer*>* getCollisionLayers() { return &_collisionLayers; }
+		Player* getPlayer() { return _player; }
+		void setPlayer(Player* player) { _player = player; }
 
 	private:
 		Level();
@@ -40,5 +44,8 @@ namespace sdlEngine
 
 		std::vector<Tileset> _tilesets;
 		std::vector<Layer*> _layers;
+		std::vector<Layer*> _collisionLayers;
+
+		Player* _player;
 	};
 }

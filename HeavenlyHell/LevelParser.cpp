@@ -68,7 +68,9 @@ namespace sdlEngine
 				{
 					parseObjectLayer(e, level->getLayers());
 				}//if
-				else if (e->FirstChildElement()->Value() == std::string("data"))
+				else if (e->FirstChildElement()->Value() == std::string("data") ||
+							(e->FirstChildElement()->NextSiblingElement() != 0 &&
+							 e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data")))
 				{
 					parseTileLayer(e, level->getLayers(), level->getTilesets());
 				}//else if
@@ -105,16 +107,31 @@ namespace sdlEngine
 	{
 		TileLayer* tileLayer = new TileLayer(_tileSize, *tilesets);
 
+		bool collidable = false;
 		std::vector<std::vector<int>> data;
 		std::string decodedIDs;
 
 		TiXmlElement* dataNode = NULL;
 		for (TiXmlElement* e = tileElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
 		{
-			if (e->Value() == std::string("data"))
+			if (e->Value() == std::string("properties"))
+			{
+				for (TiXmlElement* property = e->FirstChildElement(); property != NULL; property = property->NextSiblingElement())
+				{
+					if (property->Value() == std::string("property"))
+					{
+						if (property->Attribute("name") == std::string("collidable"))
+						{
+							collidable = true;
+						}//if
+					}//if
+				}//for
+			}//if
+
+			else if (e->Value() == std::string("data"))
 			{
 				dataNode = e;
-			}//if
+			}//else if
 		}//for
 
 		for (TiXmlNode* e = dataNode->FirstChild(); e != NULL; e = e->NextSibling())
@@ -122,7 +139,7 @@ namespace sdlEngine
 			TiXmlText* text = e->ToText();
 			std::string t = text->Value();
 			decodedIDs = base64_decode(t);
-		}//
+		}//for
 
 		// Décompression zlib
 		uLongf numGids = _width * _height * sizeof(int);
@@ -145,6 +162,11 @@ namespace sdlEngine
 		}//for
 
 		tileLayer->setTileIDs(data);
+
+		if (collidable)
+		{
+			collisionLayers->push_back(tileLayer);
+		}//if
 
 		layers->push_back(tileLayer);
 	}//parseTileLayer
@@ -213,6 +235,11 @@ namespace sdlEngine
 				}//for
 
 				gameObject->load(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed));
+
+				if (type == "Player")
+				{
+					_level->setPlayer(dynamic_cast<Player*>(gameObject));
+				}//if
 
 				objectLayer->getGameObjects()->push_back(gameObject);
 			}//if 
